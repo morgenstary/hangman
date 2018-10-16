@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hangman!</title>
+</head>
+
+
+<body>
+    <h1>Hangman!</h1>
+
+    <p id="letter"></p>
+    <p id="progress"></p>
+    <p id="word"></p>
+
+
+    <script>
+        // Create an array of words
+        var words = [
+            "javascript",
+            "monkey",
+            "amazing",
+            "pancake"
+        ];
+        // Pick a random word
+        var word = words[Math.floor(Math.random() * words.length)];
+        // Set up the answer array
+        var answerArray = [];
+        for (var i = 0; i < word.length; i++) {
+            answerArray[i] = "_ ";
+        }
+        var remainingLetters = word.length;
+
+        // Display random word to page
+        document.getElementById("word").innerHTML = answerArray.join(' ');
+        
+
+        function game() {
+            // Display keyboard event to 'letter' Id
+            document.addEventListener("keypress", function onEvent(event) {
+
+                
+                var keypress = event.key;
+                
+                
+                if (word.indexOf(word) === keypress) {
+                    alert('yes');
+                } else {
+                    alert("no");
+                }
+                console.log(keypress);
+                
+            });
+            
+        }
+        
+        console.log(word);
+        game();
+        
+        
+        
+
+
+
+
+
+    </script>
+</body>
+
+</html>
