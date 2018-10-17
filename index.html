@@ -5,16 +5,24 @@
     <title>Hangman!</title>
 </head>
 
-
 <body>
     <h1>Hangman!</h1>
-
-    <p id="letter"></p>
-    <p id="progress"></p>
+    <p id="guessed"></p>
     <p id="word"></p>
+    <p id="guessesLeft"></p>
+    <p id="wins"></p>
+    <p id="losses"></p>
+
 
 
     <script>
+        // if player guesses randomly generated word within 10 guesses, player score increses by one
+        // if not player's losses increase by one
+
+        var guessesLeft = 10;
+        var wins;
+        var losses;
+
         // Create an array of words
         var words = [
             "javascript",
@@ -33,37 +41,27 @@
 
         // Display random word to page
         document.getElementById("word").innerHTML = answerArray.join(' ');
-        
 
         function game() {
             // Display keyboard event to 'letter' Id
             document.addEventListener("keypress", function onEvent(event) {
 
-                
                 var keypress = event.key;
-                
-                
-                if (word.indexOf(word) === keypress) {
-                    alert('yes');
-                } else {
-                    alert("no");
+
+                for (var i = 0; i < word.length; i++) {
+                    // This is where I'm stuck...
+
+                    if (word[i] === keypress) {
+                    // Replace blank underscores with keypressed letter, not sure how.
+                        
+                    } else {
+                    // Display (append) guessed letters not in random words in 'guessed' id, not sure how.
+                    }
                 }
-                console.log(keypress);
-                
             });
-            
         }
-        
         console.log(word);
         game();
-        
-        
-        
-
-
-
-
-
     </script>
 </body>
 
