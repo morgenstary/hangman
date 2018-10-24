@@ -15,9 +15,6 @@
     <p id="losses">Loses: </p>
 
     <script>
-        // if player guesses randomly generated word within 10 guesses, player score increses by one
-        // if not player's losses increase by one
-
         var guessesLeft = 10;
         var wins = 0;
         var losses = 0;
@@ -64,7 +61,7 @@
                 // Handling letters not in the randomly selected word
                 if (index < 0) {
                     guessesLeft--;
-                    // Line 67 is repeated in scoreboard function in order to initialize guessesLeft variable
+                    // Line 67 is repeated in scoreboard function, line 88, in order to initialize guessesLeft variable
                     // is this ok or an example of code that shouldn't be repeated?
                     document.getElementById("guessesLeft").innerHTML = "Guesses left: " + guessesLeft;
 
@@ -83,7 +80,7 @@
             // add to win and display new random word
 
             // if (answerArray === ? full of letters) {
-
+                // such and such and so on...
             // }
             // console.log(guessesLeft);
             // console.log(answerArray);
