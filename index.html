@@ -7,60 +7,92 @@
 
 <body>
     <h1>Hangman!</h1>
-    <p id="guessed"></p>
     <p id="word"></p>
-    <p id="guessesLeft"></p>
-    <p id="wins"></p>
-    <p id="losses"></p>
-
-
+    <br>
+    <p id="guessed">Guessed letters: </p>
+    <p id="guessesLeft">Guesses left: </p>
+    <p id="wins">Wins: </p>
+    <p id="losses">Loses: </p>
 
     <script>
         // if player guesses randomly generated word within 10 guesses, player score increses by one
         // if not player's losses increase by one
 
         var guessesLeft = 10;
-        var wins;
-        var losses;
+        var wins = 0;
+        var losses = 0;
 
         // Create an array of words
         var words = [
-            "javascript",
-            "monkey",
-            "amazing",
-            "pancake"
+            "abcabc",
+            "abba"
         ];
+
+        // Guessed letters not in the randomly selected word in this array
+        var lettersGuessed = [];
+
         // Pick a random word
         var word = words[Math.floor(Math.random() * words.length)];
+
         // Set up the answer array
         var answerArray = [];
         for (var i = 0; i < word.length; i++) {
             answerArray[i] = "_ ";
         }
-        var remainingLetters = word.length;
 
         // Display random word to page
         document.getElementById("word").innerHTML = answerArray.join(' ');
 
+        //word is global so it doesn't get passed as a parameter
+        function indexsOfGuess(guess) {
+            for (let i = 0; i < word.length; i++) {
+                const letter = word[i];
+                if (letter == guess) {
+                    answerArray[i] = guess;
+                }
+            }
+            document.getElementById("word").innerHTML = answerArray.join(' ');
+        }
+
         function game() {
-            // Display keyboard event to 'letter' Id
             document.addEventListener("keypress", function onEvent(event) {
-
                 var keypress = event.key;
+                var guess = keypress.toLowerCase();
+                var index = word.indexOf(guess);
+                indexsOfGuess(guess);
+                scoreboard();
+                // Handling letters not in the randomly selected word
+                if (index < 0) {
+                    guessesLeft--;
+                    // Line 67 is repeated in scoreboard function in order to initialize guessesLeft variable
+                    // is this ok or an example of code that shouldn't be repeated?
+                    document.getElementById("guessesLeft").innerHTML = "Guesses left: " + guessesLeft;
 
-                for (var i = 0; i < word.length; i++) {
-                    // This is where I'm stuck...
 
-                    if (word[i] === keypress) {
-                    // Replace blank underscores with keypressed letter, not sure how.
-                        
-                    } else {
-                    // Display (append) guessed letters not in random words in 'guessed' id, not sure how.
-                    }
+                    lettersGuessed.push(guess);
+                    document.getElementById("guessed").innerHTML = "Guessed letters: " + lettersGuessed.join(', ');
+
                 }
             });
         }
-        console.log(word);
+
+        function scoreboard() {
+            // Here I'd like to build, if guesses left reaches 0 add to losses and display new random word
+
+            // Here I'd like to build, if each index of answerarray contains a letter before guesses left reaches 0
+            // add to win and display new random word
+
+            // if (answerArray === ? full of letters) {
+
+            // }
+            // console.log(guessesLeft);
+            // console.log(answerArray);
+
+            document.getElementById("guessesLeft").innerHTML = "Guesses left: " + guessesLeft;
+            document.getElementById("wins").innerHTML = "Wins: " + wins;
+            document.getElementById("losses").innerHTML = "Losses: " + losses;
+        }
+
         game();
     </script>
 </body>
